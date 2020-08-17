@@ -12,23 +12,32 @@ class ProductProvider extends Component {
     products: [],
     detailProduct: detailProduct,
   };
-  componentDidMount(){
-      this.setProducts();
+  componentDidMount() {
+    this.setProducts();
   }
-  setProducts = () =>{
+  setProducts = () => {
     let tempProducts = [];
-    storeProducts.forEach(item =>{
-      const singleItem = {...item};
-      tempProducts = [...tempProducts,singleItem];
+    storeProducts.forEach((item) => {
+      const singleItem = { ...item };
+      tempProducts = [...tempProducts, singleItem];
     });
-    this.setState(()=>{
-        return{products:tempProducts}
-    })
+    this.setState(() => {
+      return { products: tempProducts };
+    });
   };
-  handleDetail = () => {
-    console.log("hello from detail");
+
+  getItem = (id) => {
+    const product = this.state.products.find((item) => item.id === id);
+    return product;
   };
-  addToCart = id => {
+
+  handleDetail = (id) => {
+      const product =this.getItem();
+      this.setState(() => {
+          return{detailProduct:product}
+      });
+  };
+  addToCart = (id) => {
     console.log(`hello from add to cart.id is ${id}`);
   };
 

@@ -15,7 +15,7 @@ export default class Product extends Component {
               <div
                 className="img-container p-5"
                 onClick={() =>
-                  console.log("you clicked me on the image container")
+                  value.handleDetail(id)
                 }
               >
                 <Link to="/details">
@@ -25,7 +25,7 @@ export default class Product extends Component {
                   className="cart-btn"
                   disabled={inCart ? true : false}
                   onClick={() => {
-                    console.log("added to cart");
+                    value.addToCart(id);
                   }}
                 >
                   {inCart ? (

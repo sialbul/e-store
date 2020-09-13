@@ -79,11 +79,11 @@ class ProductProvider extends Component {
   decrement = (id) => {
     console.log("this is decrement method");
   };
-  removeItem = (id) => {
+  removeItem = id => {
     let tempProducts = [...this.state.products];
     let tempCart = [...this.state.cart];
 
-    tempCart = tempCart.filter((item) => item.id !== id);
+    tempCart = tempCart.filter(item => item.id !== id);
 
     const index = tempProducts.indexOf(this.getItem(id));
     let removedProduct = tempProducts[index];
@@ -91,17 +91,16 @@ class ProductProvider extends Component {
     removedProduct.count = 0;
     removedProduct.total = 0;
 
-this.setState(()=>{
-  return {
-    cart:[...tempCart],
-    products:[...tempProducts]
-  }
-},()=>{
-  this.addTotals();
-}
-)
-
-
+    this.setState(() => {
+        return {
+          cart: [...tempCart],
+          products: [...tempProducts],
+        };
+      },
+      () => {
+        this.addTotals();
+      }
+    );
   };
   clearCart = () => {
     this.setState(

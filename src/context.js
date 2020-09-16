@@ -79,12 +79,17 @@ class ProductProvider extends Component {
     const index = tempCart.indexOf(selectedProduct);
     const product = tempCart[index];
 
-    product.count= product.count +1;
-    product.total = product.count*product.price;
+    product.count = product.count + 1;
+    product.total = product.count * product.price;
 
-    this.setState(()=>{return{cart:[...tempCart]}},()=>{this.addTotals()});
-
-
+    this.setState(
+      () => {
+        return { cart: [...tempCart] };
+      },
+      () => {
+        this.addTotals();
+      }
+    );
   };
   decrement = (id) => {
     let tempCart = [...this.state.cart];
@@ -92,10 +97,20 @@ class ProductProvider extends Component {
     const index = tempCart.indexOf(selectedProduct);
     const product = tempCart[index];
 
-    product.count= product.count -1;
-    product.total = product.count*product.price;
-
-    this.setState(()=>{return{cart:[...tempCart]}},()=>{this.addTotals()});
+    product.count = product.count - 1;
+    if (product.count === 0) {
+      this.removeItem(id);
+    } else {
+      product.total = product.count * product.price;
+      this.setState(
+        () => {
+          return { cart: [...tempCart] };
+        },
+        () => {
+          this.addTotals();
+        }
+      );
+    }
   };
   removeItem = (id) => {
     let tempProducts = [...this.state.products];
